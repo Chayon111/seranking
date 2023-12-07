@@ -2,6 +2,10 @@ const express = require("express");
 const { getOverview } = require("./bot");
 const app = express();
 
+app.get("/", async (req, res) => {
+  res.send("Running");
+});
+
 app.get("/overview", async (req, res) => {
   req.setTimeout(0);
   const { keyword, country } = req.query;
