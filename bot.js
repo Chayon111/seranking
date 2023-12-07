@@ -9,7 +9,7 @@ puppeteer.use(
       id: "2captcha",
       token: "fe9cf77abeac7bf7c689f74bfb787d31",
     },
-    visualFeedback: true,
+    visualFeedback: false,
   })
 );
 
@@ -69,7 +69,7 @@ exports.getOverview = async ({ keyword, country }) => {
 exports.run = async () => {
   browser = await puppeteer.launch({
     args: ["--no-sandbox"],
-    headless: false,
+    headless: "new",
   });
   await logIn(username, password);
 };
