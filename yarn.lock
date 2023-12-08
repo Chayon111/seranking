@@ -1060,6 +1060,14 @@ puppeteer-core@21.6.0:
     devtools-protocol "0.0.1203626"
     ws "8.14.2"
 
+puppeteer-extra-plugin-anonymize-ua@^2.4.6:
+  version "2.4.6"
+  resolved "https://registry.yarnpkg.com/puppeteer-extra-plugin-anonymize-ua/-/puppeteer-extra-plugin-anonymize-ua-2.4.6.tgz#14fb79c9d4912f1a7abd00900718288f9a473896"
+  integrity sha512-EasOjKpPYFn72Yk7/RXM2q/CDrdPzjTnx8GfHPrwVmhcnh8Ull1DnONP73KZFF2bdwhitaQ3zRZ0yI1yFM2rzQ==
+  dependencies:
+    debug "^4.1.1"
+    puppeteer-extra-plugin "^3.2.3"
+
 puppeteer-extra-plugin-recaptcha@^3.6.8:
   version "3.6.8"
   resolved "https://registry.yarnpkg.com/puppeteer-extra-plugin-recaptcha/-/puppeteer-extra-plugin-recaptcha-3.6.8.tgz#be3644efd421600f3230b7fd2916dbc452c7704f"

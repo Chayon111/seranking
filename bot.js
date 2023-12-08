@@ -1,5 +1,6 @@
 const puppeteer = require("puppeteer-extra");
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
+puppeteer.use(require("puppeteer-extra-plugin-anonymize-ua")());
 const Recaptcha = require("puppeteer-extra-plugin-recaptcha");
 const { filter } = require("./helper");
 puppeteer.use(StealthPlugin());
@@ -9,7 +10,7 @@ puppeteer.use(
       id: "2captcha",
       token: "fe9cf77abeac7bf7c689f74bfb787d31",
     },
-    visualFeedback: false,
+    visualFeedback: true,
   })
 );
 
@@ -31,13 +32,11 @@ const logIn = async (email, password) => {
     await page.click("body");
 
     await page.click('[type="submit"]');
-    try {
-      await page.waitForSelector(".g-recaptcha", {
-        visible: true,
-        timeout: 3000,
-      });
+    let { captchas, filtered, error } = await page.findRecaptchas();
+    if (captchas) {
+      console.log("solving captcha");
       await page.solveRecaptchas();
-    } catch {
+    } else {
       console.log("no Recaptcha");
     }
     await sleep(2000);
@@ -51,7 +50,6 @@ exports.getOverview = async ({ keyword, country }) => {
   await page.goto(
     `https://online.seranking.com/research.keywords.html/?keyword=${keyword}&source=${country}`
   );
-
   const responses = await Promise.all(
     [
       `/research.api.keyword.html?do=cpc&limit=9&currency=USD&keyword=${keyword}&source=${country}`,
@@ -61,7 +59,7 @@ exports.getOverview = async ({ keyword, country }) => {
   );
 
   const jsons = await Promise.all(responses.map((response) => response.json()));
-  await page.close();
+  page.close();
   // console.log(filter(jsons));
   return filter(jsons);
 };
