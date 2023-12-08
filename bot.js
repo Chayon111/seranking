@@ -8,7 +8,7 @@ puppeteer.use(
   Recaptcha({
     provider: {
       id: "2captcha",
-      token: "fe9cf77abeac7bf7c689f74bfb787d31",
+      token: "Your 2captcha API Here",
     },
     visualFeedback: true,
   })
